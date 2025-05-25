@@ -1,1 +1,10 @@
-.config/skhd/skhdrc
+lalt - 1 : aerospace workspace 1
+lalt - 2 : aerospace workspace 2
+lalt - 3 : aerospace workspace 3
+lalt - 4 : aerospace workspace 4
+ralt - 1 : aerospace workspace Q
+ralt - 2 : aerospace workspace W
+ralt - 3 : aerospace workspace E
+ralt - 4 : aerospace workspace R
+
+alt - return : /Applications/kitty.app/Contents/MacOS/kitty -d="~" -1
