@@ -1,0 +1,121 @@
+"" Source your .vimrc
+source ~/.vimrc
+source ~/.config/nvim/init.vim
+
+"set idearefactormode=keep
+set idearefactormode=visual
+set ideajoin
+set clipboard
+set surround
+
+"set guicursor
+set exrc
+set scrolloff=8
+"set relativenumber
+set keep-english-in-normal
+
+set nohlsearch
+
+" system clipboard
+vmap <leader>y "+y
+vmap <leader>d "+d
+nmap <leader>y "+yy
+nmap <leader>p "+p
+nmap <leader>P "+P
+vmap <leader>p "+p
+vmap <leader>P "+P
+
+
+"" -- Map IDE Actions to IdeaVim -- https://jb.gg/abva4t
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+
+" Navigation
+nmap gd <Action>(QuickJavaDoc)
+nmap gD <Action>(GotoDeclaration)
+nmap gi <Action>(QuickImplementations)
+nmap gI <Action>(GotoImplementation)
+nmap gp <action>(GotoSuperMethod)
+nmap gt <action>(GotoTest)
+nmap gc <action>(VcsShowNextChangeMarker)
+nmap gu <Action>(GotoNextElementUnderCaretUsage)
+nmap gU <Action>(GotoPrevElementUnderCaretUsage)
+nmap gs <Action>(SelectInProjectView)
+nmap gh <Action>(PreviousTab)
+nmap gl <Action>(NextTab)
+nmap gb <Action>(Back)
+nmap gf <Action>(Forward)
+nmap ge <Action>(GotoNextError)
+
+" Find
+nmap <leader>ff <action>(GotoFile)
+nmap <leader>ft <action>(FindInPath)
+nmap <leader>fa <action>(GotoAction)
+
+" Show
+nmap <leader>su <Action>(ShowUsages)
+nmap <leader>sp <Action>(SelectInProjectView)
+nmap <leader>ss <action>(FileStructurePopup)
+nmap <leader>sh <action>(CallHierarchy)
+nmap <leader>sb <action>(Git.Branches)
+
+" Coding
+nmap gy <Action>(ShowErrorDescription)
+nmap <leader>n <Action>(Generate)
+map \b <Action>(ToggleLineBreakpoint)
+map \d <Action>(Debug)
+map \r <Action>(Run)
+map <leader>r <Action>(RenameElement)
+map <leader>f <Action>(ReformatCode)
+
+" Tool
+nmap <leader>c <Action>(CloseEditor)
+nmap <leader>m <Action>(Git.Menu)
+nmap <leader>/ <Action>(ShowErrorDescription)
+
+map <leader>o <Action>(FileStructurePopup)
+map <leader>c <Action>(Stop)
+map <leader>z <Action>(ToggleDistrActionFreeMode)
+map <leader>a <Action>(Annotate)
+
+nnoremap <leader><leader> <C-Tab>
+
+
+set easymotion
+
+" easymotion
+set easymotion
+nmap <leader>f <Plug>(easymotion-f)
+nmap <leader>F <Plug>(easymotion-F)
+nmap <leader>t <Plug>(easymotion-t)
+nmap <leader>T <Plug>(easymotion-T)
+nmap <leader>w <Plug>(easymotion-w)
+nmap <leader>W <Plug>(easymotion-W)
+nmap <leader>b <Plug>(easymotion-b)
+nmap <leader>B <Plug>(easymotion-B)
+nmap <leader>e <Plug>(easymotion-e)
+nmap <leader>E <Plug>(easymotion-E)
+nmap <leader>ge <Plug>(easymotion-ge)
+nmap <leader>gE <Plug>(easymotion-gE)
+nmap <leader>j <Plug>(easymotion-j)
+nmap <leader>k <Plug>(easymotion-k)
+nmap <leader>n <Plug>(easymotion-n)
+nmap <leader>N <Plug>(easymotion-N)
+nmap <leader>s <Plug>(easymotion-s)
+nmap <leader>a <Plug>(easymotion-jumptoanywhere)
+
+set NERDTree
+nnoremap <C-1> <Plug>(NERDTreeToggle)
+
+Plug 'tpope/vim-surround'
+Plug 'justinmk/vim-sneak'
+Plug 'kana/vim-textobj-entire'
+Plug 'vim-scripts/argtextobj.vim'
+let g:argtextobj_pairs="(:),{:},<:>"
+Plug 'tommcdo/vim-exchange'
+Plug 'machakann/vim-highlightedyank'
+Plug 'dbakker/vim-paragraph-motion'
+Plug 'michaeljsmith/vim-indent-object'
+set quickscope
+Plug 'unblevable/quick-scope'
+Plug 'vim-scripts/ReplaceWithRegister'

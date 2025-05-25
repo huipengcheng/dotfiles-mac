@@ -1,0 +1,311 @@
+global_vars:
+  - name: zkcard
+    type: date
+    params:
+      format: "%Y%m%d%H%M%S"
+  - name: clip
+    type: clipboard
+
+
+matches:
+  - trigger: ";mail"
+    replace: "chenghuipeng.chp@alibaba-inc.com"
+
+  - trigger: ";card"
+    replace: "lippi-interactive-card"
+
+
+  # 日期
+  - trigger: ";date"
+    replace: "{{my_date}}"
+    vars:
+      - name: my_date
+        type: date
+        params:
+          format: "%Y.%m.%d"
+
+  - trigger: ";now"
+    replace: "现在是{{time}}。"
+    vars:
+      - name: time
+        type: date
+        params:
+          format: "%H点%M分"
+  # 剪贴板 scp 的例子
+  - trigger: ";scp"
+    replace: "scp -P 6666 zbrl@zbrl.bilibili:~/$|$ {{clip}}"
+  # Python
+  - trigger: ";fans"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: script
+        params:
+          args:
+            - python3
+            - "%CONFIG%/script/print_bilibili_fans.py"
+
+  # shell_test
+  - trigger: ";shfans"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "python3 /Users/XXX/print_bilibili_fans.py"
+
+  # shell 天气
+  - trigger: ";weather"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "curl wttr.in/Shanghai?format=1"
+
+  # shell 天气
+  - trigger: ";cityc"
+    replace: "{{output}}"
+    vars:
+      - name: city
+        type: choice
+        params:
+          values:
+            - label: "北京"
+              id: "Beijing"
+            - label: "上海"
+              id: "Shanghai"
+            - label: "苏州"
+              id: "Suzhu"
+            - label: "漠河"
+              id: "Mohe"
+      - name: output
+        type: shell
+        params:
+          cmd: "curl wttr.in/{{city}}?format=1"
+
+ # shell 天气
+  - trigger: ";cityf"
+    replace: "{{output}}"
+    vars:
+      - name: form1
+        type: form
+        params:
+          layout: |-
+            城市: [[city]] 
+          fields:
+            city:
+              multiline: false
+      - name: output
+        type: shell
+        params:
+          cmd: "curl wttr.in/{{form1.city}}?format=1"
+
+
+  ##### Obsidian相关 ####
+  # 生成zk卡片
+  - trigger: ";obzk"
+    replace: "obsidian://advanced-uri?vault=knowledgehub&filepath=markdown%2F003_zk%2F{{uuid}}.md"
+    vars:
+      - name: uuid
+        type: date
+        params:
+          format: "%Y%m%d%H%M%S"
+  
+  # 方法1: 以剪贴板内容为文件名建立笔记
+  - trigger: ";obclip"
+    replace: "obsidian://advanced-uri?vault=knowledgehub&filepath=markdown%2F{{form1.mddir}}%2F{{form1.mdname}}.md"
+    vars:
+      - name: form1
+        type: form
+        params:
+          layout: |-
+            文件名: [[mdname]] 
+            保存文件夹: [[mddir]]
+          fields:
+            mdname:
+              multiline: false
+              default: "{{clip}}"
+            mddir:
+              type: list
+              values:
+                - 001_plain
+                - 002_avatar
+                - 005_moc
+
+  # 方法2: 以剪贴板内容为文件名建立笔记
+  - trigger: ";ob2clip"
+    replace: "obsidian://advanced-uri?vault=knowledgehub&filepath=markdown%2F{{dirname}}%2F{{clip}}$|$.md"
+    vars:
+      - name: dirname
+        type: choice
+        params:
+          values:
+            - label: "plain"
+              id: "001_plain"
+            - label: "avatar"
+              id: "002_avatar"
+            - label: "moc"
+              id: "005_moc"
+
+  # 制作替身
+  - trigger: ";obaaa"
+    replace: "obsidian://advanced-uri?vault=knowledgehub&filepath=markdown%2F002_avatar%2F{{uuid}}_{{clip}}.md&data=![[{{clip}}]]"
+    vars:
+      - name: uuid
+        type: date
+        params:
+          format: "%Y%m%d"
+
+  - trigger: ";sa"
+    replace: "https://sa.alibaba-inc.com/ops/terminal.html?ip={{clipboard}}"
+    vars:
+      - name: "clipboard"
+        type: "clipboard"
+          
+  - trigger: ";sunip"
+    replace: "https://sunfire.alibaba-inc.com/server/detail?ip={{clipboard}}&v=2"
+    vars:
+      - name: "clipboard"
+        type: "clipboard"
+
+
+  - trigger: ";na"
+    replace: "https://n.alibaba-inc.com/ops/app/{{clipboard}}/res?from=host \n"
+    vars:
+      - name: "clipboard"
+        type: "clipboard"
+
+  - trigger: ";ni"
+    replace: "https://n.alibaba-inc.com/ops/info/host?host={{clipboard}} \n"
+    vars:
+      - name: "clipboard"
+        type: "clipboard"
+
+  - trigger: ";dia"
+    replace: "https://mse.alibaba-inc.com/pre/diamond/configlist?DataId={{clipboard}} \n"
+    vars:
+      - name: "clipboard"
+        type: "clipboard"
+
+  - trigger: ";hsf"
+    replace: "https://hsf.alibaba-inc.com/hsfops/serviceSearch.htm?envType=pre&filter=service&pattern=*{{clipboard}}* \n"
+    vars:
+      - name: "clipboard"
+        type: "clipboard"
+
+
+  - trigger: ";log"
+    replace: "cd /home/admin/logs/$APP_NAME \n"
+
+  - trigger: ";bin"
+    replace: "cd /home/admin/${APP_NAME}/bin \n"
+
+  - trigger: ";ctrl"
+    replace: "(cd /home/admin/${APP_NAME}/bin && bash appctl.sh $|$)"
+
+      #- trigger: ";arth"
+      #  replace: "https://start.alibaba-inc.com/arthas/web-console?device={{clipboard}} \n"
+      #  vars:
+      #    - name: "clipboard"
+      #      type: "clipboard"
+
+  - trigger: ";cctrl"
+    replace: "(cd /home/admin/${APP_NAME}/bin && bash appctl.sh {{output}})"
+    vars:
+      - name: output
+        type: choice
+        params:
+          values:
+            - "restart"
+            - "start"
+            - "stop"
+
+  - trigger: ";psj"
+    replace: "ps aux | grep java \n"
+
+  - trigger: ";jstack"
+    replace: "/opt/taobao/java/bin/jstack "
+
+  - trigger: ";java"
+    replace: "/opt/taobao/java/bin/java "
+
+  - trigger: ";arthas"
+    replace: "/opt/taobao/java/bin/java -jar arthas-boot.jar"
+
+  - trigger: ";insar"
+    replace: "cd /tmp && curl -L http://pandora.alibaba-inc.com/pandora-web/arthas/install.sh | sh && ./as.sh"
+
+  - trigger: ";uid1"
+    replace: "3026410339"
+
+  - trigger: ";uid2"
+    replace: "448003264"
+
+  - trigger: ";org"
+    replace: "439446171"
+
+  - trigger: ";nc"
+    replace: "nc 127.0.0.1 "
+
+  - trigger: ";telnet"
+    replace: "telnet 127.0.0.1 "
+
+  - trigger: ";dmb"
+    form: |
+      LWP /r/DMBInternal/hsfInvoke
+      x-route-from-app:lippi-user
+      x-dmb-sign-expire-time:1685688609723
+      sv:0
+      mid:b9fdedc_f19_1884ddde3a1_1e167 0
+      x-dmb-source:true
+      app-name:lippi-dmb
+      via:LWP://11.159.222.220:53274
+      via:tcp://11.122.231.20:43220
+      dt:p
+      x-route-to:[[unit]]
+      spas-ver:SPAS_V2_2
+      x-route-origin-from:HZ
+      eagleeye-trace-id:0ba7f13116856717387421042d121c
+      x-route-hops:0
+      x-route-from:HZ
+      eagleeye-rpc-id:0.1061.1.1
+      spas-ak:e4b24f35f5a848b9b6236e73aef3dbfa
+      len: 2
+
+      []
+
+  - trigger: ";dmr"
+    form: |
+      LWP /r/DMRInternal/testMq
+      mid:b9fdedc_f19_1884ddde3a1_1e167 0
+      dmrTopic:DMR-RouterIM
+      dstRegion:[[unit]]
+      dstTopic:DMR-dummy-topic
+      len: 2
+
+      []
+
+  - trigger: ";helmdmb"
+    replace: "helm upgrade --install lippi-dmb zscluster/charts/lippi-dmb  -f setup/xgeo/global.yaml -f setup/xgeo/lippi-dmb.yaml"
+
+  - trigger: ";helmdmr"
+    replace: "helm upgrade --install lippi-dmr zscluster/charts/lippi-dmr  -f setup/xgeo/global.yaml -f setup/xgeo/lippi-dmr.yaml"
+
+  - trigger: ";kexec"
+    replace: "kubectl exec -it {{clipboard}} -- bash"
+    vars:
+      - name: "clipboard"
+        type: "clipboard"
+          
+  - trigger: ";kgetp"
+    replace: "kubectl get pods -o wide | grep "
+    vars:
+      - name: "clipboard"
+        type: "clipboard"
+
+  - trigger: ";kgetd"
+    replace: "kubectl get deployments | grep "
+    vars:
+      - name: "clipboard"
+        type: "clipboard"

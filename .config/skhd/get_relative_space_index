@@ -1,0 +1,22 @@
+#/bin/zsh
+
+display_info=$(yabai -m query --displays)
+
+primary_min_space_index=1
+primary_max_space_index=$(echo $display_info | jq '.[0].spaces[-1]') 
+((secondary_min_space_index=primary_max_space_index + 1))
+#secondary_max_space_index=$(echo $display_info | jq '.[1].spaces[-1]') 
+
+focused_space_info=$(yabai -m query --spaces | jq '.[] | select(."has-focus"==true)')
+focused_space_index=$(echo $focused_space_info | jq '.index')
+
+lo_index=$primary_min_space_index;
+#hi_index=$primary_max_space_index;
+if [ $focused_space_index -ge $secondary_min_space_index ] ; then
+    lo_index=$secondary_min_space_index;
+#    hi_index=$secondary_max_space_index;
+fi
+
+expected=$1
+((real=lo_index + expected - 1))
+return $real

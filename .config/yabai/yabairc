@@ -1,0 +1,163 @@
+yabai -m config debug_output on
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --install-sa
+sudo yabai --load-sa
+
+#############
+# App Rules #
+#############
+
+yabai -m rule --add app="^System Settings$" manage=off border=off
+yabai -m rule --add app="^MacVim$" manage=off border=off
+yabai -m rule --add app="^CleanMyMac X$" manage=off border=off
+yabai -m rule --add app="^Motrix$" manage=off border=off
+yabai -m rule --add app="^Mail$" manage=off border=off
+yabai -m rule --add app="^Font Book$" manage=off border=off
+yabai -m rule --add app="^iStat*" sticky=on layer=above manage=off border=off
+yabai -m rule --add app="Finder" manage=off border=off
+yabai -m rule --add app="Install*" manage=off border=off
+yabai -m rule --add app="^The Unarchiver$" manage=off border=off
+yabai -m rule --add app="^OpenInTerminal$" manage=off border=off
+yabai -m rule --add app="^Stats*" manage=off border=off
+yabai -m rule --add app="^Spotify*" manage=off border=off
+yabai -m rule --add app="^Amethyst*" manage=off border=off
+yabai -m rule --add app="^Music*" manage=off border=off
+yabai -m rule --add app="^Karabiner*" manage=off border=off
+yabai -m rule --add app="^DeepL$" manage=off border=off
+yabai -m rule --add app="^Grammarly*" manage=off border=off
+yabai -m rule --add app="^Keka$" manage=off border=off
+yabai -m rule --add app="Karabiner-*" manage=off border=off
+yabai -m rule --add app="Hammerspoon" manage=off border=off
+yabai -m rule --add app="App Store" manage=off border=off
+yabai -m rule --add app="Clash for Windows" manage=off border=off
+yabai -m rule --add app="Warp" manage=off border=off
+yabai -m rule --add app="Marta" manage=off border=off
+#yabai -m rule --add app="kitty" manage=off border=off
+yabai -m rule --add app="Typora" manage=off border=off
+yabai -m rule --add app="Disk Utility" manage=off border=off
+yabai -m rule --add app="Preview" manage=off border=off
+yabai -m rule --add app="^Dictionary*" manage=off  border=off
+yabai -m rule --add app="^QQ*" border=off
+yabai -m rule --add app="^SunloginClient*" manage=off border=off
+yabai -m rule --add app="^Anki*" manage=off border=off
+yabai -m rule --add app="^Logi*" manage=off border=off
+yabai -m rule --add app="^Hex Fiend*" manage=off border=off
+yabai -m rule --add app="^CopyQ*" manage=off border=off
+yabai -m rule --add app="^AliLang*" manage=off border=off topmost=on
+yabai -m rule --add app="Obsidian" manage=off border=off
+
+yabai -m rule --add title="Extension*" sticky=on manage=off border=off
+yabai -m rule --add title="Preferences$" sticky=on manage=off border=off
+yabai -m rule --add title="^Helper*" sticky=on manage=off border=off
+yabai -m rule --add title="^Stats*" manage=off border=off
+yabai -m rule --add title="^Keka*" manage=off border=off
+yabai -m rule --add title="Messages" manage=off border=off
+yabai -m rule --add title="^General*" manage=off border=off
+yabai -m rule --add title="^Display*" manage=off border=off
+yabai -m rule --add title="^Sync*" manage=off border=off
+yabai -m rule --add title="^Software Update" manage=off border=off
+yabai -m rule --add title="*Update*" manage=off border=off
+
+yabai -m space 1 --label main
+yabai -m space 2 --label dev
+yabai -m space 3 --label memory
+yabai -m space 4 --label anything
+yabai -m space 5 --label im
+yabai -m config --space im layout  stack
+yabai -m space 6 --label other
+yabai -m space 7 --label terminal
+yabai -m space 8 --label note
+
+
+yabai -m rule --add title="*JetBrains*" manage=off border=off
+yabai -m rule --add title="^JetBrains Toolbox*" manage=off border=off
+jetbrains='^(IntelliJ IDEA|WebStorm|CLion|IntelliJ IDEA-EAP|GoLand|GoLand-EAP)$'
+yabai -m rule --add app="${jetbrains}" manage=off
+yabai -m rule --add app="${jetbrains}" title="( – )" manage=on
+
+dingding='^(阿里钉|钉钉|DingTalk)$'
+yabai -m rule --add app="${dingding}" manage=off
+yabai -m rule --add app="阿里钉" manage=off
+yabai -m rule --add app="钉钉" manage=off
+yabai -m rule --add title="阿里钉" manage=off
+yabai -m rule --add title="钉钉" manage=off
+yabai -m rule --add title="${dingding}" manage=on
+
+
+yabai -m rule --add title="*" space=other
+yabai -m rule --add app="^Firefox$" space=main
+yabai -m rule --add app="^Vivaldi$" space=main
+yabai -m rule --add app="${jetbrains}" space=dev
+yabai -m rule --add app="Code" space=dev
+yabai -m rule --add app="${dingding}" space=im
+yabai -m rule --add title="${dingding}" space=im
+yabai -m rule --add app="^Google Chrome$" space=other
+yabai -m rule --add app="^Microsoft Edge$" space=other
+yabai -m rule --add app="^kitty$" space=memory
+yabai -m rule --add app="Alacritty" space=anything
+yabai -m rule --add app="Safari" space=note
+yabai -m rule --add app="^Brave Browser$" space=main
+
+###################
+# Window Settings #
+###################
+yabai -m config layout						 bsp
+yabai -m config top_padding                  13 # 40
+yabai -m config bottom_padding               13
+yabai -m config left_padding                 13 #80
+yabai -m config right_padding                13
+yabai -m config window_gap                   13
+yabai -m config focus_follows_mouse          off
+yabai -m config mouse_follows_focus          on
+yabai -m config window_origin_display        default
+yabai -m config window_placement             second_child
+yabai -m config window_topmost               off
+yabai -m config window_shadow                on
+yabai -m config window_opacity               off
+yabai -m config window_opacity_duration      0.0
+yabai -m config active_window_opacity        0.95
+yabai -m config normal_window_opacity        0.95
+#yabai -m config window_border                on
+#yabai -m config window_border_width          1
+#yabai -m config active_window_border_color   0xff9DE0AD
+#yabai -m config normal_window_border_color   0xff363636 
+# yabai -m config active_window_border_color   0xff775759
+# yabai -m config normal_window_border_color   0xff555555
+yabai -m config insert_feedback_color        0xffd75f5f
+yabai -m config split_ratio                  0.50
+yabai -m config auto_balance                 on
+
+#yabai -m config external_bar all:0:$SPACEBAR_HEIGHT
+#yabai -m config external_bar all:40:0
+yabai -m space 1 --label main
+
+#################
+# Mouse Support #
+#################
+
+# set mouse interaction modifier key (default: fn)
+yabai -m config mouse_modifier               alt
+# set modifier + left-click drag to resize window (default: move)
+yabai -m config mouse_action1                move
+# set modifier + right-click drag to resize window (default: resize)
+yabai -m config mouse_action2                resize
+yabai -m config mouse_drop_action            swap
+
+
+####################
+# External Singals #
+####################
+
+# For Yabai Indicator
+yabai -m signal --add event=mission_control_exit action='echo "refresh" | nc -U /tmp/yabai-indicator.socket'
+yabai -m signal --add event=display_added action='echo "refresh" | nc -U /tmp/yabai-indicator.socket'
+yabai -m signal --add event=display_removed action='echo "refresh" | nc -U /tmp/yabai-indicator.socket'
+yabai -m signal --add event=window_created action='echo "refresh windows" | nc -U /tmp/yabai-indicator.socket'
+yabai -m signal --add event=window_destroyed action='echo "refresh windows" | nc -U /tmp/yabai-indicator.socket'
+yabai -m signal --add event=window_focused action='echo "refresh windows" | nc -U /tmp/yabai-indicator.socket'
+yabai -m signal --add event=window_moved action='echo "refresh windows" | nc -U /tmp/yabai-indicator.socket'
+yabai -m signal --add event=window_resized action='echo "refresh windows" | nc -U /tmp/yabai-indicator.socket'
+yabai -m signal --add event=window_minimized action='echo "refresh windows" | nc -U /tmp/yabai-indicator.socket'
+yabai -m signal --add event=window_deminimized action='echo "refresh windows" | nc -U /tmp/yabai-indicator.socket'
+
+# brew services restart sketchybar
